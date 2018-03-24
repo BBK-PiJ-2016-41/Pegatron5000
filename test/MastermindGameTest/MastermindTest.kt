@@ -1,0 +1,4 @@
+package MastermindGameTest
+
+class MastermindTest {
+}

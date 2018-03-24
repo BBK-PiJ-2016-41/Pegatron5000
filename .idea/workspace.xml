@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="abf9950c-90ab-4e02-a4b1-5308697221a6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MastermindGame/Factory.kt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MastermindGame/Game.kt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MastermindGame/GameAbstractImpl.kt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MastermindGame/MastermindDriver.kt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/MastermindGameTest/MastermindTest.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +15,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MastermindDriver.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MastermindDriver.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MastermindGame/MastermindDriver.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+            <state relative-caret-position="200">
+              <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MastermindTest.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/MastermindGameTest/MastermindTest.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="50">
+              <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -64,8 +72,8 @@
       <list>
         <option value="Kotlin File" />
         <option value="Kotlin Interface" />
-        <option value="Kotlin Class" />
         <option value="Kotlin Object" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -132,8 +140,7 @@
             <path>
               <item name="Pegatron5000" type="b2602c69:ProjectViewProjectNode" />
               <item name="Pegatron5000" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="MastermindGame" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -277,12 +284,12 @@
       <updated>1521904091065</updated>
       <workItem from="1521904094074" duration="44000" />
       <workItem from="1521904158162" duration="157000" />
-      <workItem from="1521904326227" duration="250000" />
+      <workItem from="1521904326227" duration="1571000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="451000" />
+    <option name="totallyTimeSpent" value="1772000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1046" extended-state="6" />
@@ -354,8 +361,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MastermindGame/MastermindDriver.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        <state relative-caret-position="200">
+          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/MastermindGameTest/MastermindTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
           <folding />
         </state>
       </provider>
