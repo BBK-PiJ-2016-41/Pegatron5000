@@ -1,0 +1,5 @@
+package MastermindGame
+
+interface PegList {
+
+}
