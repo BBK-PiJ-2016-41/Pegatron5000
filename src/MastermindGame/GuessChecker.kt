@@ -1,0 +1,4 @@
+package MastermindGame
+
+interface GuessChecker {
+}
