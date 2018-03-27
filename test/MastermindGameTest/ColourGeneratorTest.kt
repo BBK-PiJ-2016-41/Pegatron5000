@@ -12,26 +12,12 @@ class ColourGeneratorTest {
 
     @Before
     fun initial() {
-        val b = Bcolour()
-        val g = Gcolour()
-        val o = Ocolour()
-        val p = Pcolour()
-        val r = Rcolour()
-        val y = Ycolour()
-
-        val availableColours = arrayListOf<Colour>(b, g, o, p, r, y)
+        val availableColours = arrayListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
     }
 
     @Test
     fun testGenerate4Colours() {
-        val b = Bcolour()
-        val g = Gcolour()
-        val o = Ocolour()
-        val p = Pcolour()
-        val r = Rcolour()
-        val y = Ycolour()
-
-        val availableColours = arrayListOf<Colour>(b, g, o, p, r, y)
+        val availableColours = arrayListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
         val generator = ColourGenerator()
         val result = generator.generateSequence(4, availableColours)
         assertEquals(result.size, 4)
@@ -40,14 +26,7 @@ class ColourGeneratorTest {
 
     @Test
     fun testGenerate5Colours() {
-        val b = Bcolour()
-        val g = Gcolour()
-        val o = Ocolour()
-        val p = Pcolour()
-        val r = Rcolour()
-        val y = Ycolour()
-
-        val availableColours = arrayListOf<Colour>(b, g, o, p, r, y)
+        val availableColours = arrayListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
         val generator = ColourGenerator()
         val result = generator.generateSequence(5, availableColours)
         assertEquals(result.size, 5)
@@ -55,14 +34,7 @@ class ColourGeneratorTest {
 
     @Test
     fun testGenerate10Colours() {
-        val b = Bcolour()
-        val g = Gcolour()
-        val o = Ocolour()
-        val p = Pcolour()
-        val r = Rcolour()
-        val y = Ycolour()
-
-        val availableColours = arrayListOf<Colour>(b, g, o, p, r, y)
+        val availableColours = arrayListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
         val generator = ColourGenerator()
         val result = generator.generateSequence(10, availableColours)
         assertEquals(result.size, 10)
@@ -70,14 +42,7 @@ class ColourGeneratorTest {
 
     @Test
     fun testRandomness() {
-        val b = Bcolour()
-        val g = Gcolour()
-        val o = Ocolour()
-        val p = Pcolour()
-        val r = Rcolour()
-        val y = Ycolour()
-
-        val availableColours = arrayListOf<Colour>(b, g, o, p, r, y)
+        val availableColours = arrayListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
         val generator = ColourGenerator()
         val result = generator.generateSequence(5, availableColours)
         val result2 = generator.generateSequence(5, availableColours)

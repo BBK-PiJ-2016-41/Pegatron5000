@@ -1,6 +1,6 @@
 package MastermindGame.Colours
 
-class Gcolour : Colour {
+object Gcolour : Colour {
 
 
     override val name = "green"
