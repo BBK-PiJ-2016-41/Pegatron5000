@@ -4,4 +4,5 @@ interface Colour {
     val name: String
     val letter: String
 
+    override fun toString(): String
 }
