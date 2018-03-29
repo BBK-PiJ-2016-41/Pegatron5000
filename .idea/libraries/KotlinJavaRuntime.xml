@@ -6,6 +6,7 @@
       <root url="jar://$PROJECT_DIR$/lib/kotlin-test.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/kotlin-stdlib-jdk7.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/kotlin-stdlib-jdk8.jar!/" />
+      <root url="file://C:/Program Files (x86)/jUnit" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -15,5 +16,6 @@
       <root url="jar://$PROJECT_DIR$/lib/kotlin-stdlib-jdk7-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/kotlin-stdlib-jdk8-sources.jar!/" />
     </SOURCES>
+    <jarDirectory url="file://C:/Program Files (x86)/jUnit" recursive="false" />
   </library>
 </component>
