@@ -12,4 +12,6 @@ object GameHistoryImpl: GameHistory {
     /*synchronized*/ fun addGuess() {
         numberOfGuesses++
     }
+
+    fun getProgress() = numberOfGuesses
 }

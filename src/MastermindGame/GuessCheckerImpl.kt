@@ -8,14 +8,9 @@ class GuessCheckerImpl (private val secretPegCode: PegListGuessMock, private var
         pegGuess = newGuess
     }
 
-    fun generateResult(): PegList {
-        return PegListResultsMock(peg1, peg2, peg3, peg4)
-    }
+    fun generateResult(): PegList = TODO()
 
-    private fun checkPeg(pegIndex: Int): PegImplResultMock = when(pegGuess.pegList()) {
-        (secretPegCode.pegList())[pegIndex].colour -> PegImplResultMock("B")
-        else -> checkAllColours(pegToCheck)
-    }
+    private fun checkPeg(pegIndex: Int): PegImplResultMock = TODO()
 
     private fun checkAllColours(pegToCheck: PegImplColourMock): PegImplResultMock {
         colourList = secretPegCode.pegList().map{peg -> peg.colour}

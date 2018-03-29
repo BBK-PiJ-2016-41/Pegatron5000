@@ -14,6 +14,18 @@ class GameHistoryTests {
 
     @Test
     fun checkStartsAtZero() {
-        assertEquals(gameHistory.getProgress(), 0)
+        assertEquals(0, gameHistory.getProgress())
+    }
+
+    @Test
+    fun addOneWorks() {
+        gameHistory.addGuess()
+        assertEquals(1, gameHistory.getProgress())
+    }
+
+    @Test
+    fun stopsAt12() {
+        for (i in 1..11) gameHistory.addGuess()
+        assertEquals(12, gameHistory.getProgress())
     }
 }
