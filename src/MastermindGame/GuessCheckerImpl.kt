@@ -14,8 +14,6 @@ class GuessCheckerImpl (private val secretPegCode: PegListGuessMock, private var
 
     private fun checkAllColours(pegToCheck: PegImplColourMock): PegImplResultMock {
         colourList = secretPegCode.pegList().map{peg -> peg.colour}
-        val returnPeg: PegImplResultMock
-        if (colourList.contains(pegToCheck.colour)) returnPeg = PegImplResultMock("W") else returnPeg = PegImplResultMock("BLANK")
-        return returnPeg
+        return if(colourList.contains(pegToCheck.colour)) PegImplResultMock("W") else (PegImplResultMock("BLANK"))
     }
 }
