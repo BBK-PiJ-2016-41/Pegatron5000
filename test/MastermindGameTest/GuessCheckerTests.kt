@@ -24,4 +24,10 @@ class GuessCheckerTests {
         val allBlackPegList = PegListResultsMock(blackPeg, blackPeg, blackPeg, blackPeg)
         assertEquals(guessChecker.generateResult(), allBlackPegList)
     }
+
+    fun onePegWrong() {
+        val onePegWrongList = PegListResultsMock(blackPeg, blackPeg, blackPeg, whitePeg)
+        guessChecker.setGuess(PegListGuessMock(greenPeg, bluePeg, greenPeg, greenPeg))
+        assertEquals(guessChecker.generateResult(), onePegWrongList)
+    }
 }
