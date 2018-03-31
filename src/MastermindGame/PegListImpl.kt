@@ -42,9 +42,3 @@ abstract class PegListImpl(val numPegs: Int) : PegList {
     }
 
 }
-
-//changed List to MutableList
-//got rid of type parameter seeing as we now have concrete implementations for colour and result
-//validated that >= 4 pegs should be specified
-//if empty list returned then caller can deal with it
-//what validation needs performing?
