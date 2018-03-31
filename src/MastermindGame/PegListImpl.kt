@@ -18,7 +18,7 @@ abstract class PegListImpl(val numPegs: Int) : PegList {
 
     /**
      * adds the specified number of pegs to the *pegs* list
-     * validation is performed against number of pegs requested
+     * validation is performed
      * @return the list of pegs, or if validation fails, an empty list of pegs
      */
     private fun addPegsToList(): MutableList<Peg> = when {
@@ -38,7 +38,8 @@ abstract class PegListImpl(val numPegs: Int) : PegList {
      * performs validation on the number of pegs requested
      */
     private fun validatePegs(): Boolean {
-        return numPegs >= 4
+        //add in validations
+        return true
     }
 
 }
