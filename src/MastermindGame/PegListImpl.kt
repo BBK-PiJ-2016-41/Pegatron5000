@@ -21,9 +21,12 @@ abstract class PegListImpl(val numPegs: Int) : PegList {
      * validation is performed against number of pegs requested
      * @return the list of pegs, or if validation fails, an empty list of pegs
      */
-    private fun addPegsToList(): MutableList<Peg> {
-        if (validatePegs()) { for (n in 0..numPegs) pegs.add(getNewPeg())}
-        return pegs // returns empty list that caller can deal with
+    private fun addPegsToList(): MutableList<Peg> = when {
+        validatePegs() -> {
+            for (n in 0..numPegs) {
+                pegs.add(getNewPeg())
+            }; pegs}
+        else -> pegs // returns empty list that caller can deal with
     }
 
     /**
