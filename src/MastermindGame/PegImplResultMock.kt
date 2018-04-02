@@ -1,3 +1,3 @@
 package MastermindGame
 
-data class PegImplResultMock (val colour: String): Peg
+data class PegImplResultMock (override val colour: String): Peg

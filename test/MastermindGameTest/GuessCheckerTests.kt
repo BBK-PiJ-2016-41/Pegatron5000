@@ -16,18 +16,19 @@ class GuessCheckerTests {
     val redPeg = PegImplColourMock("R")
     val whitePeg = PegImplResultMock("W")
     val blackPeg = PegImplResultMock("B")
-    val secretCodeMock = PegListGuessMock(greenPeg, bluePeg, greenPeg, redPeg)
+    val secretCodeMock = PegListGuessMock(mutableListOf(greenPeg, bluePeg, greenPeg, redPeg))
     val guessChecker = GuessCheckerImpl(secretCodeMock, secretCodeMock)
 
     @Test
     fun sameCodeAllBlack() {
-        val allBlackPegList = PegListResultsMock(blackPeg, blackPeg, blackPeg, blackPeg)
-        assertEquals(guessChecker.generateResult(), allBlackPegList)
+        val allBlackPegList = PegListResultsMock(listOf(blackPeg, blackPeg, blackPeg, blackPeg))
+        assertEquals(guessChecker.generateResult().toString(), allBlackPegList.toString())
     }
 
+    @Test
     fun onePegWrong() {
-        val onePegWrongList = PegListResultsMock(blackPeg, blackPeg, blackPeg, whitePeg)
-        guessChecker.setGuess(PegListGuessMock(greenPeg, bluePeg, greenPeg, greenPeg))
-        assertEquals(guessChecker.generateResult(), onePegWrongList)
+        val onePegWrongList = PegListResultsMock(listOf(blackPeg, blackPeg, blackPeg, whitePeg))
+        guessChecker.setGuess(PegListGuessMock(mutableListOf(greenPeg, bluePeg, greenPeg, greenPeg)))
+        assertEquals(guessChecker.generateResult().toString(), onePegWrongList.toString())
     }
 }
