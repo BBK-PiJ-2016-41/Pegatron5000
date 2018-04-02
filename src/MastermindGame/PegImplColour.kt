@@ -1,3 +1,8 @@
 package MastermindGame
 
-class PegImplColour : Peg
+class PegImplColour(val colour: Colour): Peg {
+
+    override fun printColour() {
+        print(colour.letter)
+    }
+}

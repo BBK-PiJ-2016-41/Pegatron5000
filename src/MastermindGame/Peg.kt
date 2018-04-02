@@ -5,9 +5,7 @@ package MastermindGame
  */
 interface Peg {
 
-    // Holds colour
-    // toString - varies depending on type of peg
-    // Allowable colours - resultPeg can only have black/white
-    // Two types: colour peg, result peg
+    // Depending on type of peg, colour will be printed differently - code pegs in full, result pegs as initial
+    fun printColour()
 
 }
