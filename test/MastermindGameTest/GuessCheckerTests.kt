@@ -22,13 +22,13 @@ class GuessCheckerTests {
     @Test
     fun sameCodeAllBlack() {
         val allBlackPegList = PegListResultsMock(listOf(blackPeg, blackPeg, blackPeg, blackPeg))
-        assertEquals(guessChecker.generateResult().toString(), allBlackPegList.toString())
+        assertEquals(allBlackPegList.toString(), guessChecker.generateResult().toString())
     }
 
     @Test
     fun onePegWrong() {
         val onePegWrongList = PegListResultsMock(listOf(blackPeg, blackPeg, blackPeg, whitePeg))
         guessChecker.setGuess(PegListGuessMock(mutableListOf(greenPeg, bluePeg, greenPeg, greenPeg)))
-        assertEquals(guessChecker.generateResult().toString(), onePegWrongList.toString())
+        assertEquals(onePegWrongList.toString(), guessChecker.generateResult().toString())
     }
 }

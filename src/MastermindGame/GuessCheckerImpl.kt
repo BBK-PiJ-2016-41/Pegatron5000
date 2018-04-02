@@ -9,7 +9,7 @@ class GuessCheckerImpl (private val secretPegCode: PegListGuessMock, private var
     }
 
     fun generateResult(): PegList {
-        return PegListResultsMock(pegGuess.pegList.map{peg -> checkPeg(peg, 0)})
+        return PegListResultsMock(pegGuess.pegList.map{peg -> checkPeg(peg, pegGuess.pegList.indexOf(peg))})
     }
 
     private fun checkPeg(peg: PegImplColourMock,pegIndex: Int): PegImplResultMock = when (peg.colour) {
