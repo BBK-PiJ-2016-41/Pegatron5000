@@ -21,4 +21,11 @@ class GuessValidatorTests {
         val shortList = PegListGuessMock(mutableListOf(greenPeg, bluePeg, secondGreen))
         assertFalse(guessValidator.checkGuess(shortList))
     }
+
+    @Test
+    fun checksColoursAreLegit() {
+        val randomColour = PegImplColourMock("M")
+        val oddColourList = PegListGuessMock(mutableListOf(greenPeg, secondGreen, randomColour, bluePeg))
+        assertFalse(guessValidator.checkGuess(oddColourList))
+    }
 }
