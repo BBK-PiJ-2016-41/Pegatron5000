@@ -1,16 +1,18 @@
 package MastermindGameTest
 
 import MastermindGame.*
-import MastermindGame.PegImplColourMock
-import MastermindGame.PegImplResultMock
-import MastermindGame.PegListGuessMock
 import org.junit.Before
 
 import org.junit.Test
 import kotlin.test.assertEquals
 
 class GameHistoryTests {
-    val gameHistory = GameHistoryImpl
+    private lateinit var gameHistory: GameHistoryImpl
+
+    @Before
+    fun before() {
+        gameHistory = GameHistoryImpl
+    }
 
     @Test
     fun checkStartsAtZero() {
@@ -24,8 +26,10 @@ class GameHistoryTests {
     }
 
     @Test
-    fun stopsAt12() {
-        for (i in 1..11) gameHistory.addGuess()
-        assertEquals(12, gameHistory.getProgress())
+    fun wontCreateSecondInstance() {
+        gameHistory.addGuess()
+        val newHistory = GameHistoryImpl
+        assertEquals(1, newHistory.getProgress())
     }
+
 }
