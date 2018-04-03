@@ -2,15 +2,20 @@ package MastermindGame
 
 class GuessCheckerImpl (private val secretPegCode: PegListGuessMock): GuessChecker {
 
-    private lateinit var colourList: List<String>
+    private var codeColourMap: Map<String, Int>
+    private lateinit var guessColourMap: Map<String, Int>
     private lateinit var pegGuess: PegListGuessMock
+
+    init {
+        codeColourMap = mapColours(secretPegCode)
+    }
 
     fun setGuess(newGuess: PegListGuessMock) {
         pegGuess = newGuess
+        guessColourMap = mapColours(pegGuess)
     }
 
     fun generateResult(): PegList {
-        // needs to be a map that includes indexes, because indexOf will return the index of the first peg that matches.
         return PegListResultsMock(pegGuess.pegMap.map{peg -> checkPeg(peg.value, peg.key)})
     }
 
@@ -20,7 +25,17 @@ class GuessCheckerImpl (private val secretPegCode: PegListGuessMock): GuessCheck
     }
 
     private fun checkAllColours(pegToCheck: PegImplColourMock): PegImplResultMock {
-        colourList = secretPegCode.pegList.map{peg -> peg.colour}
-        return if(colourList.contains(pegToCheck.colour)) PegImplResultMock("W") else (PegImplResultMock("_"))
+        return if(codeColourMap.contains(pegToCheck.colour) && codeColourMap[pegToCheck.colour]!! >= guessColourMap[pegToCheck.colour]!!) PegImplResultMock("W")
+        else (PegImplResultMock("_"))
+    }
+
+    private fun mapColours(pegs: PegListGuessMock): Map<String, Int> {
+        val map = hashMapOf<String, Int>()
+        pegs.pegList.forEach{
+            peg -> if(map.containsKey(peg.colour))
+            map[peg.colour] = map[peg.colour]!! + 1
+            else map[peg.colour] = 1
+        }
+        return map
     }
 }
