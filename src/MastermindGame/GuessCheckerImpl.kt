@@ -11,11 +11,11 @@ class GuessCheckerImpl (private val secretPegCode: PegListGuessMock): GuessCheck
 
     fun generateResult(): PegList {
         // needs to be a map that includes indexes, because indexOf will return the index of the first peg that matches.
-        return PegListResultsMock(pegGuess.pegList.map{peg -> checkPeg(peg, pegGuess.pegList.indexOf(peg))})
+        return PegListResultsMock(pegGuess.pegMap.map{peg -> checkPeg(peg.value, peg.key)})
     }
 
-    private fun checkPeg(peg: PegImplColourMock,pegIndex: Int): PegImplResultMock = when (peg.colour) {
-        (secretPegCode.pegList[pegIndex]).colour -> PegImplResultMock("B")
+    private fun checkPeg(peg: PegImplColourMock, pegIndex: Int): PegImplResultMock = when (peg.colour) {
+        (secretPegCode.pegMap[pegIndex])!!.colour -> PegImplResultMock("B")
         else -> checkAllColours(peg)
     }
 
