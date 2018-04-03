@@ -14,6 +14,7 @@ class GuessCheckerMockTests {
     val secondGreen = PegImplColourMock("G")
     val thirdGreen = PegImplColourMock("G")
     val bluePeg = PegImplColourMock("B")
+    val secondBlue = PegImplColourMock("B")
     val yellowPeg = PegImplColourMock("Y")
     val secondYellow = PegImplColourMock("Y")
     val thirdYellow = PegImplColourMock("Y")
@@ -50,8 +51,8 @@ class GuessCheckerMockTests {
 
     @Test
     fun onePegWrong() {
-        val onePegWrongList = PegListResultsMock(listOf(blackPeg, secondBlack, thirdBlack, whitePeg))
-        guessChecker.setGuess(PegListGuessMock(mutableListOf(greenPeg, bluePeg, secondGreen, thirdGreen)))
+        val onePegWrongList = PegListResultsMock(listOf(blackPeg, secondBlack, thirdBlack, blankPeg))
+        guessChecker.setGuess(PegListGuessMock(mutableListOf(greenPeg, bluePeg, secondGreen, yellowPeg)))
         assertEquals(onePegWrongList.toString(), guessChecker.generateResult().toString())
     }
 
@@ -69,5 +70,14 @@ class GuessCheckerMockTests {
         val differentGuessChecker = GuessCheckerImpl(allPegsDifferent)
         differentGuessChecker.setGuess(allPegsDifferentOrder)
         assertEquals(PegListResultsMock(listOf(whitePeg, secondWhite, thirdWhite, fourthWhite)).toString(), differentGuessChecker.generateResult().toString())
+    }
+
+    @Test
+    fun duplicatesGetEqualNumberOfWhitePegs() {
+        val duplicateCode = PegListGuessMock(mutableListOf(greenPeg, secondGreen, bluePeg, secondBlue))
+        val duplicateGuessChecker = GuessCheckerImpl(duplicateCode)
+        val duplicateGuess = PegListGuessMock(mutableListOf(greenPeg, secondGreen, thirdGreen, bluePeg))
+        duplicateGuessChecker.setGuess(duplicateGuess)
+        assertEquals(PegListResultsMock(listOf(blackPeg, secondBlack, blankPeg, thirdBlack)).toString(), duplicateGuessChecker.generateResult().toString())
     }
 }
