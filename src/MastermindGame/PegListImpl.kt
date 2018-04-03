@@ -1,16 +1,16 @@
 package MastermindGame
 
 /**
- * implementation of PegList that provides an abstraction for creating lists of different types of pegs
+ * implementation of PegList that provides an abstraction for creating a set of different types of pegs
  *
  * @param numPegs the number of pegs that need to added to the peg list
  */
 abstract class PegListImpl(val numPegs: Int) : PegList {
 
-    override val pegs: MutableList<Peg> = mutableListOf()
+    override val pegs: MutableMap<Int, Peg> = mutableMapOf()
 
     /**
-     * generates a list of pegs of the required type and size for use by the caller
+     * generates a map of pegs of the required type and size for use by the caller
      */
     init {
         addPegsToList()
@@ -19,12 +19,13 @@ abstract class PegListImpl(val numPegs: Int) : PegList {
     /**
      * adds the specified number of pegs to the *pegs* list
      * validation is performed
+     * each peg is assigned a numeric key value for use in interpreting the list of pegs
      * @return the list of pegs, or if validation fails, an empty list of pegs
      */
-    private fun addPegsToList(): MutableList<Peg> = when {
+    private fun addPegsToList(): MutableMap<Int, Peg> = when {
         validatePegs() -> {
-            for (n in 0..numPegs) {
-                pegs.add(getNewPeg())
+            for (n in 1..numPegs) {
+                pegs.put(n, getNewPeg())
             }; pegs}
         else -> pegs // returns empty list that caller can deal with
     }
@@ -38,8 +39,7 @@ abstract class PegListImpl(val numPegs: Int) : PegList {
      * performs validation on the number of pegs requested
      */
     private fun validatePegs(): Boolean {
-        //add in validations
-        return true
+        return numPegs > 0
     }
 
 }

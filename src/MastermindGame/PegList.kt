@@ -7,7 +7,8 @@ interface PegList {
 
     /**
      * the container that stores pegs
+     * an integer key allows pegs to be accessed
      */
-    val pegs: MutableList<Peg>
+    val pegs: MutableMap<Int, Peg>
 
 }
