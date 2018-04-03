@@ -1,8 +1,9 @@
 package MastermindGame
 
-class GuessCheckerImpl (private val secretPegCode: PegListGuessMock, private var pegGuess: PegListGuessMock): GuessChecker {
+class GuessCheckerImpl (private val secretPegCode: PegListGuessMock): GuessChecker {
 
     private lateinit var colourList: List<String>
+    private lateinit var pegGuess: PegListGuessMock
 
     fun setGuess(newGuess: PegListGuessMock) {
         pegGuess = newGuess

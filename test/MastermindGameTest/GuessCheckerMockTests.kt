@@ -8,7 +8,7 @@ import MastermindGame.PegListGuessMock
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class GuessCheckerTests {
+class GuessCheckerMockTests {
 
     val greenPeg = PegImplColourMock("G")
     val bluePeg = PegImplColourMock("B")
@@ -18,10 +18,11 @@ class GuessCheckerTests {
     val blackPeg = PegImplResultMock("B")
     val blankPeg = PegImplResultMock("_")
     val secretCodeMock = PegListGuessMock(mutableListOf(greenPeg, bluePeg, greenPeg, redPeg))
-    val guessChecker = GuessCheckerImpl(secretCodeMock, secretCodeMock)
+    val guessChecker = GuessCheckerImpl(secretCodeMock)
 
     @Test
     fun sameCodeAllBlack() {
+        guessChecker.setGuess(secretCodeMock)
         val allBlackPegList = PegListResultsMock(listOf(blackPeg, blackPeg, blackPeg, blackPeg))
         assertEquals(allBlackPegList.toString(), guessChecker.generateResult().toString())
     }
@@ -46,4 +47,9 @@ class GuessCheckerTests {
         guessChecker.setGuess(PegListGuessMock(mutableListOf(greenPeg, bluePeg, yellowPeg, greenPeg)))
         assertEquals(twoPegWrongList.toString(), guessChecker.generateResult().toString())
     }
+    /*
+    @Test
+    fun allPegsDifferent() {
+        val allPegs
+    }*/
 }
