@@ -6,9 +6,10 @@ package MastermindGame
 interface PegList {
 
     /**
-     * the container that stores pegs
-     * an integer key allows pegs to be accessed
+     * returns a map of pegs requested by the caller
+     *
+     * @return a map of pegs plus associated numeric id
      */
-    val pegs: MutableMap<Int, Peg>
+    fun getPegMap(): MutableMap<Int, Peg>
 
 }
