@@ -20,10 +20,11 @@ abstract class PegListImpl(val pegList: MutableList<Peg>) : PegList {
     }
 
     /**
-     * adds the pegs to the *pegs* map
+     * validates then adds the pegs to the *pegs* map
      * each peg is assigned a numeric key value for use in interpreting the list of pegs
      */
     private fun addPegsToList() {
+        validatePegs()
         var id = 1
         pegList.map{pegs[id] = it; id++}
     }
@@ -33,6 +34,11 @@ abstract class PegListImpl(val pegList: MutableList<Peg>) : PegList {
      * @return a map of pegs
      */
     override fun getPegMap(): MutableMap<Int, Peg> = pegs
+
+    /**
+     * validates that the correct type of peg has been requested in the list
+     */
+    abstract fun validatePegs()
 
     /**
      * returns the map of pegs as a string
