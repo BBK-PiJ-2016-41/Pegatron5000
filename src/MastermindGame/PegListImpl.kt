@@ -25,15 +25,19 @@ abstract class PegListImpl(val pegList: MutableList<Peg>) : PegList {
      */
     private fun addPegsToList() {
         var id = 1
-        for (peg in pegList) {
-            pegs.put(id, peg)
-            id++
-        }
+        pegList.map { pegs[id] = it; id++}
     }
 
     /**
      * returns the *pegs* map
+     * @return a map of pegs
      */
     override fun getPegMap(): MutableMap<Int, Peg> = pegs
+
+    /**
+     * returns the map of pegs as a string
+     * @return a string representing the peg colours
+     */
+    override fun toString(): String = (pegs.map{peg -> peg.value.printColour()}).toString()
 
 }
