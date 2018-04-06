@@ -25,7 +25,7 @@ abstract class PegListImpl(val pegList: MutableList<Peg>) : PegList {
      */
     private fun addPegsToList() {
         var id = 1
-        pegList.map { pegs[id] = it; id++}
+        pegList.map{pegs[id] = it; id++}
     }
 
     /**
