@@ -8,7 +8,7 @@ class PegListColourMock(pegList: MutableList<Peg>) : PegListImplMock(pegList) {
     override fun validatePegs() {
         for (p in pegList) {
             try {
-                if (p.javaClass.typeName == "MastermindGame.PegImplColour") {
+                if (p.javaClass.typeName == "MastermindGame.PegColour") {
                     //if class type equals what is required then do nothing
                 }
             } catch (e: IllegalArgumentException) {
