@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 
 class GuessValidatorTests {
-    val guessValidator = GuessValidator(4)
+    val guessValidator = GuessValidatorImpl(4)
     val greenPeg = PegImplColourMock("G")
     val secondGreen = PegImplColourMock("G")
     val thirdGreen = PegImplColourMock("G")
