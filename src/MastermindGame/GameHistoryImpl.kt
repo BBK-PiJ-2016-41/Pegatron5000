@@ -3,9 +3,13 @@ package MastermindGame
 object GameHistoryImpl: GameHistory {
     private var numberOfGuesses = 0
 
-    fun addGuess() {
+    override fun addGuess() {
         numberOfGuesses++
     }
 
-    fun getProgress() = numberOfGuesses
+    override fun getProgress() = numberOfGuesses
+
+    override fun printProgress() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
