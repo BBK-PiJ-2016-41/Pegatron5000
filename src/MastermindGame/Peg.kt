@@ -3,7 +3,10 @@ package MastermindGame
 /**
  * Peg interface
  */
-interface Peg {
-    val colour: Colour
+open class Peg(var colour: Colour) {
+
+    override fun toString(): String {
+        return colour.toString()
+    }
 
 }
