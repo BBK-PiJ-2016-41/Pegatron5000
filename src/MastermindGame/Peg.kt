@@ -5,6 +5,5 @@ package MastermindGame
  */
 interface Peg {
     val colour: Colour
-    val type: String
 
 }

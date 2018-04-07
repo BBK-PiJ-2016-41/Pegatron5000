@@ -2,7 +2,8 @@ package MastermindGameTest
 
 import MastermindGame.ColourMock
 import MastermindGame.Peg
-import MastermindGame.PegImpl
+import MastermindGame.PegImplColour
+import MastermindGame.PegImplResult
 import org.junit.*
 import kotlin.test.assertEquals
 
@@ -12,8 +13,8 @@ class PegImplTest {
 
     @Before
     fun build() {
-        colourPeg = PegImpl(ColourMock("Red", "R"))
-        resultPeg = PegImpl(ColourMock("Black", "Bl"))
+        colourPeg = PegImplColour(ColourMock("Red", "R"))
+        resultPeg = PegImplResult(ColourMock("Black", "Bl"))
     }
 
     @Test
@@ -25,14 +26,5 @@ class PegImplTest {
     fun testToStringResult() {
         assertEquals("Black", resultPeg.toString())
     }
-
-    @Test
-    fun testTypeResult() {
-        assertEquals("result", resultPeg.type)
-    }
-
-    @Test
-    fun testTypeColour() {
-        assertEquals("colour", colourPeg.type)
-    }
+    
 }
