@@ -10,12 +10,12 @@ class GuessCheckerImpl (private val secretPegCode: PegListGuessMock): GuessCheck
         codeColourMap = mapColours(secretPegCode)
     }
 
-    fun setGuess(newGuess: PegListGuessMock) {
+    override fun setGuess(newGuess: PegListGuessMock) {
         pegGuess = newGuess
         guessColourMap = mapColours(pegGuess)
     }
 
-    fun generateResult(): PegList {
+    override fun generateResult(): PegList {
         return PegListResultsMock(pegGuess.pegMap.map{peg -> checkPeg(peg.value, peg.key)})
     }
 
