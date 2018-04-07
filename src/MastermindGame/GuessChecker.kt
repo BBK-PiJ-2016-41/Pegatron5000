@@ -2,7 +2,7 @@ package MastermindGame
 
 interface GuessChecker {
 
-    fun setGuess(newGuess: PegListGuessMock)
+    fun setGuess(newGuess: PegList)
 
-    fun generateResult(): PegList
+    fun generateResult(): List<Colour>
 }

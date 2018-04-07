@@ -1,40 +1,40 @@
 package MastermindGame
 
-class GuessCheckerImpl (private val secretPegCode: PegListGuessMock): GuessChecker {
+class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
 
     private var codeColourMap: Map<String, Int>
     private lateinit var guessColourMap: Map<String, Int>
-    private lateinit var pegGuess: PegListGuessMock
+    private lateinit var pegGuess: PegList
 
     init {
-        codeColourMap = mapColours(secretPegCode)
+        codeColourMap = mapColours(secretPegCode.getPegMap().map{peg -> peg.value})
     }
 
-    override fun setGuess(newGuess: PegListGuessMock) {
+    override fun setGuess(newGuess: PegList) {
         pegGuess = newGuess
-        guessColourMap = mapColours(pegGuess)
+        guessColourMap = mapColours(pegGuess.getPegMap().map{peg -> peg.value})
     }
 
-    override fun generateResult(): PegList {
-        return PegListResultsMock(pegGuess.pegMap.map{peg -> checkPeg(peg.value, peg.key)})
+    override fun generateResult(): List<Colour> {
+        return pegGuess.getPegMap().map{peg -> checkPeg(peg.value, peg.key)}
     }
 
-    private fun checkPeg(peg: PegImplColourMock, pegIndex: Int): PegImplResultMock = when (peg.colour) {
-        (secretPegCode.pegMap[pegIndex])!!.colour -> PegImplResultMock("B")
+    private fun checkPeg(peg: Peg, pegIndex: Int): Colour = when (peg.colour.name) {
+        (secretPegCode.getPegMap()[pegIndex])!!.colour.name -> ResultColourBlack
         else -> checkAllColours(peg)
     }
 
-    private fun checkAllColours(pegToCheck: PegImplColourMock): PegImplResultMock {
-        return if(codeColourMap.contains(pegToCheck.colour) && codeColourMap[pegToCheck.colour]!! >= guessColourMap[pegToCheck.colour]!!) PegImplResultMock("W")
-        else (PegImplResultMock("_"))
+    private fun checkAllColours(pegToCheck: Peg): Colour {
+        return if(codeColourMap.contains(pegToCheck.colour.name) && codeColourMap[pegToCheck.colour.name]!! >= guessColourMap[pegToCheck.colour.name]!!) ResultColourWhite
+        else ResultNoColour
     }
 
-    private fun mapColours(pegs: PegListGuessMock): Map<String, Int> {
+    private fun mapColours(pegs: List<Peg>): Map<String, Int> {
         val map = hashMapOf<String, Int>()
-        pegs.pegList.forEach{
-            peg -> if(map.containsKey(peg.colour))
-            map[peg.colour] = map[peg.colour]!! + 1
-            else map[peg.colour] = 1
+        pegs.forEach{
+            peg -> if(map.containsKey(peg.colour.name))
+            map[peg.colour.name] = map[peg.colour.name]!! + 1
+            else map[peg.colour.name] = 1
         }
         return map
     }
