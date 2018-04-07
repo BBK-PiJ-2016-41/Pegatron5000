@@ -3,6 +3,15 @@ package MastermindGame
 object Factory {
     fun getInstance(c: Class<*>, b: Boolean?): Game = TODO()
 
+    /**
+     * Uses reflection to find all of the colour subclasses available in the Colours folder
+     * As each letter of the alphabet only has one colour, runs through the alphabet and builds
+     * the standardised name of each potential class
+     * Then checks whether the class exists, and if it does adds it to the list of available colours
+     * If it does not exist, a ClassNotFoundException is caught and the method looks for the next colour
+     * 
+     * @return availableColours : a list of colours found that the game can use
+     */
     fun findAvailableColours() : MutableList<Colour> {
         var availableColours = mutableListOf<Colour>();
         val colourLetters = arrayListOf<String>("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
