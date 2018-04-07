@@ -28,5 +28,13 @@ class PegFactoryTest {
         assertEquals(expected, colourList.toString())
     }
 
+    @Test
+    fun testMakeResultPegList() {
+        val resultList = PegFactory.makeColourPegs(mutableListOf(ColourMock("Black", "Bl"),
+                ColourMock("White", "Wh"), ColourMock("White", "Wh"),
+                ColourMock("None", "")))
+        val expected = "[Black, White, White, None]"
+        assertEquals(expected, resultList.toString())
+    }
 
 }
