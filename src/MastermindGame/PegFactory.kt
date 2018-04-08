@@ -62,10 +62,10 @@ object PegFactory {
     }
 
     //return mutable list of pegs
-    fun interpretUserInput(userInput : String, numPegs: Int) : MutableList<Colour?> {
+    fun interpretUserInput(userInput : String, numPegs: Int) : MutableList<Colour> {
         val colours = findAvailableColours().map{colour -> Pair(colour.letter, colour)}.toMap()
         val result = userInput.split("").filter{ letter -> (colours.containsKey(letter))}
-                .map{letter -> colours[letter] }.toMutableList()
+                .map{letter -> colours[letter] as Colour}.toMutableList()
         if (result.size != numPegs || userInput.length != numPegs) throw InputMismatchException("Please enter a string of length $numPegs with the correct colours")
         return result
     }
