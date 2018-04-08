@@ -20,11 +20,13 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
      */
     private lateinit var pegGuess: PegList
 
+    private lateinit var pegResult: List<Colour>
+
     /**
      * Upon initialisation, maps the colours in the peg code to indicate how many times each occurs
      */
     init {
-        codeColourMap = mapColours(secretPegCode.getPegMap().map{peg -> peg.value})
+        codeColourMap = mapColours(secretPegCode.getPegMap().map{it.value})
     }
 
     /**
@@ -32,14 +34,15 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
      */
     override fun setGuess(newGuess: PegList) {
         pegGuess = newGuess
-        guessColourMap = mapColours(pegGuess.getPegMap().map{peg -> peg.value})
+        guessColourMap = mapColours(pegGuess.getPegMap().map{it.value})
     }
 
     /**
      * Generates the result from the current guess held by the guess checker.
      */
     override fun generateResult(): List<Colour> {
-        return pegGuess.getPegMap().map{peg -> checkPeg(peg.value, peg.key)}
+        pegResult = pegGuess.getPegMap().map{checkPeg(it.value, it.key)}
+        return pegResult
     }
 
     /**
@@ -64,10 +67,15 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
     private fun mapColours(pegs: List<Peg>): Map<String, Int> {
         val map = hashMapOf<String, Int>()
         pegs.forEach{
-            peg -> if(map.containsKey(peg.colour.name))
-            map[peg.colour.name] = map[peg.colour.name]!! + 1
-            else map[peg.colour.name] = 1
+            if(map.containsKey(it.colour.name))
+            map[it.colour.name] = map[it.colour.name]!! + 1
+            else map[it.colour.name] = 1
         }
         return map
     }
+
+    /**
+     *
+     */
+    fun isCorrect() = pegResult.fold(false){bool, colour -> colour.name == "Black" && bool}
 }
