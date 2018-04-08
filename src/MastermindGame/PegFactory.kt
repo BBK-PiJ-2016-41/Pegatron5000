@@ -5,16 +5,13 @@ import java.util.*
 
 object PegFactory {
 
+
     fun makePegs(input: MutableList<Colour>): PegList {
         val pegs = mutableListOf<Peg>()
         input.forEach { pegs.add(PegImpl(it)) } // Turn each colour into a peg and add to list
 
         // Return a shuffled pegList if result, else return in the same order
-        return when (input[0].toString()) {
-            "White ", "Black ", "" -> PegListImpl(pegs.shuffled() as MutableList)
-            else -> PegListImpl(pegs)
-        }
-
+        return if (input[0].letter.length != 1) { PegListImpl(pegs.shuffled() as MutableList) } else { PegListImpl(pegs) }
     }
 
     /**
@@ -25,11 +22,10 @@ object PegFactory {
      */
     fun generateSequence(num : Int) : ArrayList<Colour> {
         val availableColours = findAvailableColours()
-        var randomColours = arrayListOf<Colour>()
+        val randomColours = arrayListOf<Colour>()
 
         for(x in 1..num) {
-            var randomLimit = availableColours.size
-            var r = Random().nextInt(randomLimit)
+            val r = Random().nextInt(availableColours.size)
             randomColours.add(availableColours[r])
         }
 
