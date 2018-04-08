@@ -1,6 +1,8 @@
 import MastermindGame.ColourGenerator
 import MastermindGame.Colours.*
 import MastermindGame.Factory
+import MastermindGame.Peg
+import MastermindGame.PegImpl
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -39,5 +41,12 @@ class FactoryTest {
         val result = Factory.generateSequence(4)
         val result2 = Factory.generateSequence(4)
         assertNotEquals(result,result2)
+    }
+
+    @Test
+    fun testInterpretUserInput() {
+        val result = Factory.interpretUserInput("BGOP")
+        val expected = mutableListOf<Peg>(PegImpl(Bcolour), PegImpl(Gcolour), PegImpl(Ocolour), PegImpl(Pcolour))
+        assertEquals(expected.toString(), result.toString())
     }
 }
