@@ -9,7 +9,12 @@ object PegFactory {
         val pegs = mutableListOf<Peg>()
         input.forEach { pegs.add(PegImpl(it)) } // Turn each colour into a peg and add to list
 
-        return PegListImpl(pegs)
+        // Return a shuffled pegList if result, else return in the same order
+        return when (input[0].toString()) {
+            "White", "Black", "" -> PegListImpl(pegs.shuffled() as MutableList)
+            else -> PegListImpl(pegs)
+        }
+
     }
 
     /**

@@ -40,9 +40,6 @@ class PegListImpl(val pegList: MutableList<Peg>) : PegList {
      * @return a string representing the peg colours
      */
     override fun toString(): String {
-        return when (pegList[0].toString()) {
-            "White", "Black", "" -> pegList.shuffled().toString()
-            else -> pegList.toString()
-        }
+        return pegList.toString()
     }
 }
