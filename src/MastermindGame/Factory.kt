@@ -4,6 +4,7 @@ import MastermindGame.Colours.Colour
 import java.util.*
 
 object Factory {
+
     fun getInstance(c: Class<*>, b: Boolean?): Game = TODO()
 
     /**
@@ -53,5 +54,21 @@ object Factory {
             }
         }
         return availableColours
+    }
+
+    //return mutable list of pegs
+    fun interpretUserInput(userInput : String) : MutableList<Peg> {
+        val colours = findAvailableColours()
+        var inputArray = userInput.split("")
+        var result = mutableListOf<Peg>()
+        for(character in inputArray) {
+            for(colour in colours)
+            if(character.equals(colour.letter)) {
+                val peg = PegImpl(colour)
+                result.add(peg)
+            }
+        }
+
+        return result
     }
 }
