@@ -32,12 +32,12 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
                 println("What is your next guess?\nType in the characters for your guess and press enter.")
                 println("Enter guess: ")
                 var userGuess = readLine()!!.toUpperCase()
-                var guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess))
+                var guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
                 displayTheCode(showCode, secretCode)
                 while (!validator.checkGuess(guessPegList)) {
                     println("Invalid guess, try again")
                     userGuess = readLine()!!.toUpperCase()
-                    guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess))
+                    guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
                 }
 
                 guessCheck.setGuess(guessPegList)
