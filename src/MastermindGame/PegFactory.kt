@@ -1,5 +1,8 @@
 package MastermindGame
 
+import MastermindGame.Colours.Colour
+import java.util.*
+
 object PegFactory {
     var listLength: Int = 0
 

@@ -1,5 +1,7 @@
 package MastermindGame
 
+import MastermindGame.Colours.Colour
+
 /**
  * Peg interface
  */
