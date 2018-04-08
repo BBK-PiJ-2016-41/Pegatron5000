@@ -39,14 +39,10 @@ class PegListImpl(val pegList: MutableList<Peg>) : PegList {
      * returns the map of pegs as a string
      * @return a string representing the peg colours
      */
-    //TODO - white and black and none should shuffle before returning
     override fun toString(): String {
-        var result = ""
-        when (pegList[0].toString()) {
-            "White", "Black", "" -> pegs.forEach { _, u -> result += u  }
-            else -> pegs.forEach { _, u -> result += u  }
+        return when (pegList[0].toString()) {
+            "White", "Black", "" -> pegList.shuffle().toString()
+            else -> pegList.toString()
         }
-        return result
     }
-
 }
