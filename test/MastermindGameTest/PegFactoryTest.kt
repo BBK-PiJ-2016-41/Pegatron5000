@@ -55,7 +55,7 @@ class PegFactoryTest {
 
     @Test
     fun testInterpretUserInput() {
-        val result = PegFactory.interpretUserInput("BGOP")
+        val result = PegFactory.interpretUserInput("BGOP", 4)
         val expected = mutableListOf<Peg>(PegImpl(Bcolour), PegImpl(Gcolour), PegImpl(Ocolour), PegImpl(Pcolour))
         assertEquals(expected.toString(), result.toString())
     }
