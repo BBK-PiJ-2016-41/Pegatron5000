@@ -40,6 +40,8 @@ class PegListImpl(val pegList: MutableList<Peg>) : PegList {
      * @return a string representing the peg colours
      */
     override fun toString(): String {
-        return pegList.toString()
+        var result = ""
+        pegList.forEach { x -> result += x.toString() }
+        return if (result == "") { "No pegs" } else { result }
     }
 }

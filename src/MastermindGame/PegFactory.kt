@@ -11,7 +11,7 @@ object PegFactory {
 
         // Return a shuffled pegList if result, else return in the same order
         return when (input[0].toString()) {
-            "White", "Black", "" -> PegListImpl(pegs.shuffled() as MutableList)
+            "White ", "Black ", "" -> PegListImpl(pegs.shuffled() as MutableList)
             else -> PegListImpl(pegs)
         }
 

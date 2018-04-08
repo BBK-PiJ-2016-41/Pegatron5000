@@ -5,6 +5,6 @@ object ResultColourWhite : Colour {
     override val letter = "W"
 
     override fun toString(): String {
-        return name
+        return "$name "
     }
 }

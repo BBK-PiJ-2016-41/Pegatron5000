@@ -22,7 +22,7 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
             val secretCode = PegFactory.generateSequence(numPegs)
             secretCodePegs = PegFactory.makePegs(secretCode)
             validator = GuessValidatorImpl(numPegs)
-            displayTheCode(showCode, secretCode)
+            displayTheCode(showCode, secretCodePegs)
             val guessCheck = GuessCheckerImpl(secretCodePegs)
             var gameFinished = false
 
@@ -33,7 +33,7 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
                 println("Enter guess: ")
                 var userGuess = readLine()!!.toUpperCase()
                 var guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
-                displayTheCode(showCode, secretCode)
+                displayTheCode(showCode, secretCodePegs)
                 while (!validator.checkGuess(guessPegList)) {
                     println("Invalid guess, try again")
                     userGuess = readLine()!!.toUpperCase()
@@ -85,7 +85,7 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
         """)
     }
 
-    private fun displayTheCode(displayCode: Boolean, code: ArrayList<Colour>) {
+    private fun displayTheCode(displayCode: Boolean, code: PegList) {
         if (displayCode) println("The secret code is $code\n")
     }
 
