@@ -1,11 +1,11 @@
 package MastermindGame
 
 /**
- * implementation of PegList that provides an abstraction for creating a set of different types of pegs
+ * implementation of PegList
  *
  * @param pegList the pegs to be added to the map
  */
-abstract class PegListImplMock(val pegList: MutableList<Peg>) : PegList {
+class PegListImpl(val pegList: MutableList<Peg>) : PegList {
 
     /**
      * map of pegs for use in guesses and results
@@ -24,7 +24,6 @@ abstract class PegListImplMock(val pegList: MutableList<Peg>) : PegList {
      * each peg is assigned a numeric key value for use in interpreting the list of pegs
      */
     private fun addPegsToList() {
-        validatePegs()
         var id = 1
         pegList.map{pegs[id] = it; id++}
     }
@@ -35,10 +34,6 @@ abstract class PegListImplMock(val pegList: MutableList<Peg>) : PegList {
      */
     override fun getPegMap(): MutableMap<Int, Peg> = pegs
 
-    /**
-     * validates that the correct type of peg has been requested in the list
-     */
-    abstract fun validatePegs()
 
     /**
      * returns the map of pegs as a string

@@ -21,7 +21,7 @@ class PegFactoryTest {
 
     @Test
     fun testMakeColourPegList() {
-        val colourList = PegFactory.makeColourPegs(mutableListOf(ColourMock("Red", "R"),
+        val colourList = PegFactory.makePegs(mutableListOf(ColourMock("Red", "R"),
                 ColourMock("Yellow", "Y"), ColourMock("Mauve", "M"),
                 ColourMock("Pink", "P")))
         val expected = "[Red, Yellow, Mauve, Pink]"
@@ -30,7 +30,7 @@ class PegFactoryTest {
 
     @Test
     fun testMakeResultPegList() {
-        val resultList = PegFactory.makeColourPegs(mutableListOf(ColourMock("Black", "Bl"),
+        val resultList = PegFactory.makePegs(mutableListOf(ColourMock("Black", "Bl"),
                 ColourMock("White", "Wh"), ColourMock("White", "Wh"),
                 ColourMock("None", "")))
         val expected = "[Black, White, White, None]"
