@@ -41,7 +41,8 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
                 }
 
                 guessCheck.setGuess(guessPegList)
-                val result = guessCheck.generateResult()
+
+                var result = PegFactory.makePegs(guessCheck.generateResult() as MutableList<Colour>)
                 GameHistoryImpl.addGuess(guessPegList, result)
                 GameHistoryImpl.printProgress()
 

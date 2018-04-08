@@ -6,13 +6,13 @@ object GameHistoryImpl: GameHistory {
     /**
      * A map to store the guesses and results associated with them
      */
-    private var guessResultMap = mutableMapOf<PegList, List<Colour>>()
+    private var guessResultMap = mutableMapOf<PegList, PegList>()
 
     /**
      * Takes a guess in the form of a PegList, and result in the form of a List<Colour>
      *     to keep a record of the game progress.
      */
-    override fun addGuess(guess: PegList, result: List<Colour>) {
+    override fun addGuess(guess: PegList, result: PegList) {
         guessResultMap.put(guess, result)
     }
 

@@ -7,7 +7,7 @@ interface GameHistory {
      * Takes a guess in the form of a PegList, and result in the form of a List<Colour>
      *     to keep a record of the game progress.
      */
-    fun addGuess(guess: PegList, result: List<Colour>)
+    fun addGuess(guess: PegList, result: PegList)
 
     /**
      * Returns the total number of guess/result combinations so far
