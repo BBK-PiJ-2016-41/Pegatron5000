@@ -1,5 +1,7 @@
 package MastermindGame
 
+import MastermindGame.Colours.Colour
+
 interface GameHistory {
     /**
      * Takes a guess in the form of a PegList, and result in the form of a List<Colour>

@@ -1,6 +1,6 @@
 package MastermindGame.Colours
 
-object ResultColourBlack : Colour{
+class ResultColourBlack : Colour{
     override val name = "Black"
     override val letter = "Bl"
 

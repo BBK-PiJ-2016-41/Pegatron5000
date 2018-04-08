@@ -1,5 +1,7 @@
 package MastermindGame
 
+import MastermindGame.Colours.Colour
+
 object GameHistoryImpl: GameHistory {
     /**
      * A map to store the guesses and results associated with them
