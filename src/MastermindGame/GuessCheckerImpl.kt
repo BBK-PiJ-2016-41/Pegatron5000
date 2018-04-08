@@ -77,5 +77,5 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
     /**
      *
      */
-    override fun isCorrect() = pegResult.fold(false){bool, colour -> colour.name == "Black" && bool}
+    override fun isCorrect() = pegResult.fold(true){bool, colour -> colour.name == "Black" && bool}
 }
