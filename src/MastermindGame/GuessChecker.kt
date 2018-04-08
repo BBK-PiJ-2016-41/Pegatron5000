@@ -12,4 +12,6 @@ interface GuessChecker {
      * Generates the result from the current guess held by the guess checker.
      */
     fun generateResult(): List<Colour>
+
+    fun isCorrect(): Boolean
 }

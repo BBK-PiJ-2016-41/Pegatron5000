@@ -27,4 +27,8 @@ object GameHistoryImpl: GameHistory {
     override fun printProgress() {
         guessResultMap.forEach { t, u -> println("Guess: $t, Result: $u") }
     }
+
+    override fun clearHistory() {
+        guessResultMap.clear()
+    }
 }

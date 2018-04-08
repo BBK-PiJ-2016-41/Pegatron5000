@@ -18,4 +18,6 @@ interface GameHistory {
      * Prints out the guesses and results made so far
      */
     fun printProgress()
+
+    fun clearHistory()
 }
