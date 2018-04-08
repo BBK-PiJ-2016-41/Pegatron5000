@@ -62,15 +62,14 @@ object PegFactory {
     }
 
     //return mutable list of pegs
-    fun interpretUserInput(userInput : String) : MutableList<Peg> {
+    fun interpretUserInput(userInput : String) : MutableList<Colour> {
         val colours = findAvailableColours()
         var inputArray = userInput.split("")
-        var result = mutableListOf<Peg>()
+        var result = mutableListOf<Colour>()
         for(character in inputArray) {
             for(colour in colours)
                 if(character.equals(colour.letter)) {
-                    val peg = PegImpl(colour)
-                    result.add(peg)
+                    result.add(colour)
                 }
         }
 
