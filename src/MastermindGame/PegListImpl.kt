@@ -36,7 +36,7 @@ class PegListImpl(val pegList: MutableList<Peg>) : PegList {
 
 
     /**
-     * returns the map of pegs as a string
+     * returns the contents of PegList as a string
      * @return a string representing the peg colours
      */
     override fun toString(): String {
