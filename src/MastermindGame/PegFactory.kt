@@ -4,11 +4,6 @@ import MastermindGame.Colours.Colour
 import java.util.*
 
 object PegFactory {
-    var listLength: Int = 0
-
-    fun startFactory(listLength: Int) {
-        this.listLength = listLength
-    }
 
     fun makePegs(input: MutableList<Colour>): PegList {
         val pegs = mutableListOf<Peg>()
