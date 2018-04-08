@@ -6,11 +6,11 @@ import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
-class FactoryTest {
+class Factorytesting {
 
     @Test
     fun testFindingColours() {
-        val fact = Factory()
+        val fact = Factory
         val result = fact.findAvailableColours()
         val expected = mutableListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
         assertEquals(expected, result)
@@ -18,35 +18,26 @@ class FactoryTest {
 
     @Test
     fun testGenerate4Colours() {
-        val availableColours = arrayListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
-        val generator = ColourGenerator()
-        val result = generator.generateSequence(4, availableColours)
+        val result = Factory.generateSequence(4)
         assertEquals(result.size, 4)
-
     }
 
     @Test
     fun testGenerate5Colours() {
-        val availableColours = arrayListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
-        val generator = ColourGenerator()
-        val result = generator.generateSequence(5, availableColours)
+        val result = Factory.generateSequence(5)
         assertEquals(result.size, 5)
     }
 
     @Test
     fun testGenerate10Colours() {
-        val availableColours = arrayListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
-        val generator = ColourGenerator()
-        val result = generator.generateSequence(10, availableColours)
+        val result = Factory.generateSequence(10)
         assertEquals(result.size, 10)
     }
 
     @Test
     fun testRandomness() {
-        val availableColours = arrayListOf<Colour>(Bcolour, Gcolour, Ocolour, Pcolour, Rcolour, Ycolour)
-        val generator = ColourGenerator()
-        val result = generator.generateSequence(5, availableColours)
-        val result2 = generator.generateSequence(5, availableColours)
+        val result = Factory.generateSequence(4)
+        val result2 = Factory.generateSequence(4)
         assertNotEquals(result,result2)
     }
 }
