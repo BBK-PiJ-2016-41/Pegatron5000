@@ -1,6 +1,9 @@
 package MastermindGame
 
 import MastermindGame.Colours.Colour
+import MastermindGame.Colours.ResultColourBlack
+import MastermindGame.Colours.ResultColourWhite
+import MastermindGame.Colours.ResultNoColour
 
 class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
 
@@ -42,8 +45,8 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
     /**
      * A helper function for generateResult() that checks for an exact match between the guess peg colour and code peg colour
      */
-    private fun checkPeg(peg: Peg, pegIndex: Int): Colour = when (peg.colour.name) {
-        (secretPegCode.getPegMap()[pegIndex])!!.colour.name -> ResultColourBlack as Colour
+    private fun checkPeg(peg: Peg, pegIndex: Int) = when (peg.colour.name) {
+        (secretPegCode.getPegMap()[pegIndex])!!.colour.name -> ResultColourBlack()
         else -> checkAllColours(peg)
     }
 
@@ -51,8 +54,8 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
      * A helper function for checkPeg() that checks for a colour match elsewhere in the guess code in the event of a failed match
      */
     private fun checkAllColours(pegToCheck: Peg): Colour {
-        return if(codeColourMap.contains(pegToCheck.colour.name) && codeColourMap[pegToCheck.colour.name]!! >= guessColourMap[pegToCheck.colour.name]!!) ResultColourWhite as Colour
-        else ResultNoColour as Colour
+        return if(codeColourMap.contains(pegToCheck.colour.name) && codeColourMap[pegToCheck.colour.name]!! >= guessColourMap[pegToCheck.colour.name]!!) ResultColourWhite()
+        else ResultNoColour()
     }
 
     /**
