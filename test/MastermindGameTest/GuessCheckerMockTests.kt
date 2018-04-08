@@ -1,9 +1,6 @@
 package MastermindGameTest
 
 import MastermindGame.*
-import MastermindGame.PegImplColourMock
-import MastermindGame.PegImplResultMock
-import MastermindGame.PegListGuessMock
 
 import org.junit.Test
 import kotlin.test.assertEquals

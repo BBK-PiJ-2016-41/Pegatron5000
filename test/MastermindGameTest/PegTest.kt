@@ -1,6 +1,5 @@
 package MastermindGameTest
 
-import MastermindGame.ColourMock
 import MastermindGame.Peg
 import MastermindGame.PegImpl
 import org.junit.*
