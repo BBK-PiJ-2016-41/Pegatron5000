@@ -20,7 +20,7 @@ class PegListImpl(val pegList: MutableList<Peg>) : PegList {
     }
 
     /**
-     * validates then adds the pegs to the *pegs* map
+     * adds pegs to the *pegs* map
      * each peg is assigned a numeric key value for use in interpreting the list of pegs
      */
     private fun addPegsToList() {

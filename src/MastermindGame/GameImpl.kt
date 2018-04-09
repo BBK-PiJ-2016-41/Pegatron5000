@@ -1,6 +1,7 @@
 package MastermindGame
 
 import MastermindGame.Colours.Colour
+import java.util.*
 
 class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
 
@@ -15,9 +16,9 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
         while (newGame) {
             GameHistoryImpl.clearHistory()
             displayIntroText()
-            print("How many pegs do you want? ")
-            numPegs = readLine()!!.toInt() // requires validation for non-numeric
-            println("The available colours are: " + printAvailableColours())
+            print("How many pegs do you want to play with? ")
+            numPegs = getNumPegs()
+            println("The available colours are " + printAvailableColours())
             println("Generating secret code....")
             val secretCode = PegFactory.generateSequence(numPegs)
             secretCodePegs = PegFactory.makePegs(secretCode)
@@ -30,29 +31,21 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
 
                 println("You have ${turns - GameHistoryImpl.getProgress()} guesses left\n")
                 println("What is your next guess?\nType in the characters for your guess and press enter.")
-                println("Enter guess: ")
-                var userGuess = readLine()!!.toUpperCase()
-                var guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
-                displayTheCode(showCode, secretCodePegs)
-                while (!validator.checkGuess(guessPegList)) {
-                    println("Invalid guess, try again")
-                    userGuess = readLine()!!.toUpperCase()
-                    guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
-                }
-
+                print("Enter guess: ")
+                val guessPegList = getUserGuess(numPegs, secretCodePegs, validator)
                 guessCheck.setGuess(guessPegList)
 
-                var result = PegFactory.makePegs(guessCheck.generateResult() as MutableList<Colour>)
+                val result = PegFactory.makePegs(guessCheck.generateResult() as MutableList<Colour>)
                 GameHistoryImpl.addGuess(guessPegList, result)
                 GameHistoryImpl.printProgress()
 
                 if (guessCheck.isCorrect()) {
-                    println("You solved the puzzle! Good job")
+                    println("\nYou solved the puzzle! Good job\n")
                     gameFinished = true
                     newGame = playAnotherGame()
                 } else {
                     if (turns - GameHistoryImpl.getProgress() == 0) {
-                        println("You did not solve the puzzle. Too bad.")
+                        println("\nYou did not solve the puzzle. Too bad\n")
                         gameFinished = true
                         newGame = playAnotherGame()
                     } else {
@@ -65,25 +58,58 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
 
     private fun displayIntroText() {
         println("""
-        Welcome to Mastermind.
+Welcome to Mastermind.
 
-        This is a text version of the classic board game Mastermind.
-        The computer will think of a secret code.
-        The code consists of 4 colored pegs.
-        The pegs may be one of six colors: blue, green , orange, purple, red, or yellow.
-        A color may appear more than once in the code.
+This is a text version of the classic board game Mastermind.
+The computer will think of a secret code.
+The code consists of 4 coloured pegs.
+The pegs may be one of six colours: blue, green, orange, purple, red, or yellow.
+A color may appear more than once in the code.
 
-        You try to guess what colored pegs are in the code and what order they are in
-        After making a guess the result will be displayed.
-        A result consists of a black peg for each peg you have exactly correct (color and position) in your guess.
-        For each peg in the guess that is the correct color, but is out of position, you get a white peg.
+You try to guess what coloured pegs are in the code and what order they are in
+After making a guess the result will be displayed.
+A result consists of a black peg for each peg you have exactly correct (colour and position) in your guess.
+For each peg in the guess that is the correct colour, but is out of position, you get a white peg.
 
-        Only the first letter of the color is displayed. q1_2.B for Blue, R for Red, and so forth.
-        When entering guesses you only need to enter the first character of the color as a capital letter.
+Only the first letter of the colour is displayed. B for Blue, R for Red, and so forth.
+When entering guesses you only need to enter the first character of the color as a capital letter.
 
-        You have 12 to guess the answer or you lose the game.\n
+You have 12 attempts to guess the answer or you lose the game.
         """)
     }
+
+    private fun getNumPegs(): Int {
+        var valid = false
+        var numPegs = 0
+        val message = "Please enter a number greater than 0\nHow many pegs do you want? "
+        while (!valid) {
+            try {
+                numPegs = readLine()!!.toInt()
+                if (numPegs > 0) valid = true
+                else print(message)
+            } catch(e: Exception) {
+                print(message)
+            }
+        }
+        return numPegs
+    }
+
+    private fun getUserGuess(numPegs: Int, secretCodePegs: PegList, validator: GuessValidatorImpl): PegList {
+        var valid = false
+        var guessPegList = PegFactory.makePegs(PegFactory.generateSequence(1))
+        while(!valid) {
+            try {
+                val userGuess = readLine()!!.toUpperCase()
+                guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
+                displayTheCode(showCode, secretCodePegs)
+                if (validator.checkGuess(guessPegList)) valid = true
+            } catch(e: InputMismatchException) {
+                println(e.message)
+            }
+        }
+        return guessPegList
+    }
+
 
     private fun displayTheCode(displayCode: Boolean, code: PegList) {
         if (displayCode) println("The secret code is $code\n")
