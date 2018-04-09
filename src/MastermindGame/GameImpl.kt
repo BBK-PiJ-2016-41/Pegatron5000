@@ -1,6 +1,7 @@
 package MastermindGame
 
 import MastermindGame.Colours.Colour
+import java.util.*
 
 class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
 
@@ -31,18 +32,10 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
                 println("You have ${turns - GameHistoryImpl.getProgress()} guesses left\n")
                 println("What is your next guess?\nType in the characters for your guess and press enter.")
                 println("Enter guess: ")
-                var userGuess = readLine()!!.toUpperCase()
-                var guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
-                displayTheCode(showCode, secretCodePegs)
-                while (!validator.checkGuess(guessPegList)) {
-                    println("Invalid guess, try again")
-                    userGuess = readLine()!!.toUpperCase()
-                    guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
-                }
-
+                val guessPegList = getUserGuess(numPegs, secretCodePegs, validator)
                 guessCheck.setGuess(guessPegList)
 
-                var result = PegFactory.makePegs(guessCheck.generateResult() as MutableList<Colour>)
+                val result = PegFactory.makePegs(guessCheck.generateResult() as MutableList<Colour>)
                 GameHistoryImpl.addGuess(guessPegList, result)
                 GameHistoryImpl.printProgress()
 
@@ -99,6 +92,22 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
             }
         }
         return numPegs
+    }
+
+    private fun getUserGuess(numPegs: Int, secretCodePegs: PegList, validator: GuessValidatorImpl): PegList {
+        var valid = false
+        var guessPegList = PegFactory.makePegs(PegFactory.generateSequence(1))
+        while(!valid) {
+            try {
+                val userGuess = readLine()!!.toUpperCase()
+                guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
+                displayTheCode(showCode, secretCodePegs)
+                if (validator.checkGuess(guessPegList)) valid = true
+            } catch(e: InputMismatchException) {
+                println(e.message)
+            }
+        }
+        return guessPegList
     }
 
 
