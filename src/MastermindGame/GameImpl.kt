@@ -16,7 +16,7 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
             GameHistoryImpl.clearHistory()
             displayIntroText()
             print("How many pegs do you want? ")
-            numPegs = readLine()!!.toInt() // requires validation for non-numeric
+            numPegs = getNumPegs()
             println("The available colours are: " + printAvailableColours())
             println("Generating secret code....")
             val secretCode = PegFactory.generateSequence(numPegs)
@@ -84,6 +84,23 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
         You have 12 to guess the answer or you lose the game.\n
         """)
     }
+
+    private fun getNumPegs(): Int {
+        var valid = false
+        var numPegs = 0
+        val message = "Please enter an number greater than 0\nHow many pegs do you want? "
+        while (!valid) {
+            try {
+                numPegs = readLine()!!.toInt()
+                if (numPegs > 0) valid = true
+                else print(message)
+            } catch(e: Exception) {
+                print(message)
+            }
+        }
+        return numPegs
+    }
+
 
     private fun displayTheCode(displayCode: Boolean, code: PegList) {
         if (displayCode) println("The secret code is $code\n")
