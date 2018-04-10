@@ -4,54 +4,28 @@ import MastermindGame.Colours.Colour
 import java.util.*
 
 class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
+    var gameFinished = false
+    var newGame = true
+    val turns = 12
 
     override fun runGames() {
-
-        var newGame = true
-        var numPegs: Int
+        var numPegs:Int
         var secretCodePegs: PegList
-        val turns = 12
-        var validator: GuessValidatorImpl
 
         while (newGame) {
             GameHistoryImpl.clearHistory()
             displayIntroText()
-            print("How many pegs do you want to play with? ")
             numPegs = getNumPegs()
             println("The available colours are " + printAvailableColours())
-            println("Generating secret code....")
-            val secretCode = PegFactory.generateSequence(numPegs)
-            secretCodePegs = PegFactory.makePegs(secretCode)
-            validator = GuessValidatorImpl(numPegs)
+            secretCodePegs = generateCode(numPegs)
             displayTheCode(showCode, secretCodePegs)
             val guessCheck = GuessCheckerImpl(secretCodePegs)
-            var gameFinished = false
 
             while (GameHistoryImpl.getProgress() <= turns && !gameFinished) {
-
-                println("You have ${turns - GameHistoryImpl.getProgress()} guesses left\n")
-                println("What is your next guess?\nType in the characters for your guess and press enter.")
-                print("Enter guess: ")
-                val guessPegList = getUserGuess(numPegs, secretCodePegs, validator)
+                val guessPegList = getUserGuess(numPegs, secretCodePegs, GuessValidatorImpl(numPegs))
                 guessCheck.setGuess(guessPegList)
-
-                val result = PegFactory.makePegs(guessCheck.generateResult() as MutableList<Colour>)
-                GameHistoryImpl.addGuess(guessPegList, result)
-                GameHistoryImpl.printProgress()
-
-                if (guessCheck.isCorrect()) {
-                    println("\nYou solved the puzzle! Good job\n")
-                    gameFinished = true
-                    newGame = playAnotherGame()
-                } else {
-                    if (turns - GameHistoryImpl.getProgress() == 0) {
-                        println("\nYou did not solve the puzzle. Too bad\n")
-                        gameFinished = true
-                        newGame = playAnotherGame()
-                    } else {
-                        continue
-                    }
-                }
+                updateAndPrintHistory(guessCheck, guessPegList)
+                checkGuess(guessCheck)
             }
         }
     }
@@ -76,6 +50,7 @@ When entering guesses you only need to enter the first character of the color as
 
 You have 12 attempts to guess the answer or you lose the game.
         """)
+        println("How many pegs do you want?")
     }
 
     private fun getNumPegs(): Int {
@@ -94,7 +69,14 @@ You have 12 attempts to guess the answer or you lose the game.
         return numPegs
     }
 
+    private fun generateCode(numPegs: Int) : PegList {
+        println("Generating secret code....")
+        return PegFactory.makePegs(PegFactory.generateSequence(numPegs))
+    }
     private fun getUserGuess(numPegs: Int, secretCodePegs: PegList, validator: GuessValidatorImpl): PegList {
+        println("You have ${turns - GameHistoryImpl.getProgress()} guesses left\n")
+        println("What is your next guess?\nType in the characters for your guess and press enter.")
+        print("Enter guess: ")
         var valid = false
         var guessPegList = PegFactory.makePegs(PegFactory.generateSequence(1))
         while(!valid) {
@@ -122,6 +104,26 @@ You have 12 attempts to guess the answer or you lose the game.
             listOfColours += colour.toString()
         }
         return listOfColours
+    }
+
+    private fun updateAndPrintHistory(guessCheck : GuessCheckerImpl, guessPegList: PegList) {
+        var result = PegFactory.makePegs(guessCheck.generateResult() as MutableList<Colour>)
+        GameHistoryImpl.addGuess(guessPegList, result)
+        GameHistoryImpl.printProgress()
+    }
+
+    private fun checkGuess(guessCheck: GuessCheckerImpl) {
+        if (guessCheck.isCorrect()) {
+            println("You solved the puzzle! Good job")
+            gameFinished = true
+            newGame = playAnotherGame()
+        } else {
+            if (turns - GameHistoryImpl.getProgress() == 0) {
+                println("You did not solve the puzzle. Too bad.")
+                gameFinished = true
+                newGame = playAnotherGame()
+            }
+        }
     }
 
     private fun playAnotherGame(): Boolean {
