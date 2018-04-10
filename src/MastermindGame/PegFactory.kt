@@ -25,13 +25,9 @@ object PegFactory {
     fun generateSequence(num : Int) : ArrayList<Colour> {
         val availableColours = findAvailableColours()
         var randomColours = arrayListOf<Colour>()
-
         for(x in 1..num) {
-            var randomLimit = availableColours.size
-            var r = Random().nextInt(randomLimit)
-            randomColours.add(availableColours[r])
+            randomColours.add(availableColours[Random().nextInt(availableColours.size)])
         }
-
         return randomColours
     }
 
@@ -46,7 +42,7 @@ object PegFactory {
      * @return availableColours : a list of colours found that the game can use
      */
     fun findAvailableColours() : MutableList<Colour> {
-        var availableColours = mutableListOf<Colour>()
+        val availableColours = mutableListOf<Colour>()
         val colourLetters = arrayListOf<String>("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
                 "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
 
@@ -67,9 +63,9 @@ object PegFactory {
 
     //return mutable list of pegs
     fun interpretUserInput(userInput : String, numPegs: Int) : MutableList<Colour> {
-        val colours = findAvailableColours().map{colour -> Pair(colour.letter, colour)}.toMap()
+        val colours = findAvailableColours().map{it -> Pair(it.letter, it)}.toMap()
         val result = userInput.split("").filter{ letter -> (colours.containsKey(letter))}
-                .map{letter -> colours[letter] as Colour}.toMutableList()
+                .map{it -> colours[it] as Colour}.toMutableList()
         if (result.size != numPegs || userInput.length != numPegs) throw InputMismatchException("Please enter a string of length $numPegs with the correct colours")
         return result
     }
