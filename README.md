@@ -1,9 +1,9 @@
 # Pegatron5000
 The Mastermind game for SDP CW3 - Go Team Win
-Ian Robinson / irobin02
-Kathryn Buckley / kbuckl03
-Sarah Vincent / svince04
-Hannah Spencer / hspenc03
+<p>Ian Robinson / irobin02</p>
+<p>Kathryn Buckley / kbuckl03</p>
+<p>Sarah Vincent / svince04</p>
+<p>Hannah Spencer / hspenc03</p>
 
 <p>To-do</p>
 <ul>
@@ -12,7 +12,6 @@ Hannah Spencer / hspenc03
 	<li>Colour.kt requires docstring</li>
 	<li>GameHistory.kt add docstring to clearHistory method</li>
 	<li>GameHistoryImpl.kt remove docstrings from methods which already have them in interface</li>
-	<li>GameImpl.kt tidy up and add docstrings to private methods</li>
 	<li>GuessChecker.kt add docstring to isCorrect method</li>
 	<li>GuessCheckerImpl.kt add docstring to pegResult, removePegColoursFromMaps.  Remove from isCorrect as it goes in the interface</li>
 	<li>GuessValidatorImpl.kt replace peg with it in the return of checkGuess method</li>
