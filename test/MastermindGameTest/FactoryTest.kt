@@ -1,4 +1,3 @@
-import MastermindGame.ColourGenerator
 import MastermindGame.Colours.*
 import MastermindGame.Factory
 import MastermindGame.Peg

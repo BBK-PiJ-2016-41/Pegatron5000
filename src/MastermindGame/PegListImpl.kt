@@ -41,7 +41,7 @@ class PegListImpl(val pegList: MutableList<Peg>) : PegList {
      */
     override fun toString(): String {
         var result = ""
-        pegList.forEach { x -> result += x.toString() }
-        return if (result == "") { "No pegs" } else { result }
+        pegList.forEach {result += it.toString()}
+        return if (result == "") {"No pegs"} else {result}
     }
 }
