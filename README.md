@@ -1,8 +1,14 @@
 # Pegatron5000
 The Mastermind game for SDP CW3 - Go Team Win
+Ian Robinson / irobin02
+Kathryn Buckley / kbuckl03
+Sarah Vincent / svince04
+Hannah Spencer / hspenc03
+
 <p>To-do</p>
 <ul>
-	<li>Add names to the readMe</li>
+	<li>Add summary of how to add colours, change amount of turns and select number of pegs to play with to ReadMe</li>
+	<li>Add break down of areas worked on by each of us to the ReadMe</li>
 	<li>Colour.kt requires docstring</li>
 	<li>Factory.kt requires docstring</li>
 	<li>Game.kt update docstring</li>
