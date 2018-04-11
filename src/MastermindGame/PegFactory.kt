@@ -61,11 +61,21 @@ object PegFactory {
         return availableColours
     }
 
-    //return mutable list of pegs
+
+    /**
+     * Takes a string from the userinput of colours they want to guess and turns it into a list
+     * of colours so that it can become a peglist for comparison
+     * Validates whether the input contains the colours and number of pegs being used in the game,
+     * throwing an exception if not
+     *
+     * @param userInput: the string of the colour initials the user is guessing
+     * @param numPegs: the number of pegs being used for this game
+     * @return Mutable list of Colours that correspond to the input
+     */
     fun interpretUserInput(userInput : String, numPegs: Int) : MutableList<Colour> {
-        val colours = findAvailableColours().map{it -> Pair(it.letter, it)}.toMap()
-        val result = userInput.split("").filter{ letter -> (colours.containsKey(letter))}
-                .map{it -> colours[it] as Colour}.toMutableList()
+        val colours = findAvailableColours().map{Pair(it.letter, it)}.toMap()
+        val result = userInput.split("").filter{(colours.containsKey(it))}
+                .map{colours[it] as Colour}.toMutableList()
         if (result.size != numPegs || userInput.length != numPegs) throw InputMismatchException("Please enter a string of length $numPegs with the correct colours")
         return result
     }
