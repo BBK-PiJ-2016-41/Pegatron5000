@@ -26,6 +26,7 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
         var secretCodePegs: PegList
 
         while (newGame) {
+            gameFinished = false
             GameHistoryImpl.clearHistory()
             displayIntroText()
             numPegs = getNumPegs()
