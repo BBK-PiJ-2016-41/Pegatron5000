@@ -18,7 +18,6 @@ The Mastermind game for SDP CW3 - Go Team Win
 	<li>PegFactory.kt add docstring to makePegs and interpretUserInput</li>
 	<li>PegImpl.kt add docstring</li>
 	<li>GameTest unit tests need writing</li>
-	<li>FactoryTest unit tests need writing</li>
 	<li>GameHistoryTest unit tests need updating</li>
 	<li>GuessCheckerTest unit tests need updating</li>
 	<li>GuessValidatorTest unit tests need updating</li>
