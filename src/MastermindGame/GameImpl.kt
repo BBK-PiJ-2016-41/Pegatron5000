@@ -48,7 +48,7 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
      * displays the Mastermind game introductory text
      */
     private fun displayIntroText() {
-        println("""
+        print("""
 Welcome to Mastermind.
 
 This is a text version of the classic board game Mastermind.
@@ -66,8 +66,8 @@ Only the first letter of the colour is displayed. B for Blue, R for Red, and so 
 When entering guesses you only need to enter the first character of the color as a capital letter.
 
 You have 12 attempts to guess the answer or you lose the game.
-        """)
-        print("How many pegs do you want? ")
+
+How many pegs do you want? """)
     }
 
     /**
