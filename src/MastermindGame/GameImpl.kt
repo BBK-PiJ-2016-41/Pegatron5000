@@ -19,7 +19,7 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
     /**
      * sets how many turns the player is allowed to take to guess the code
      */
-    val turns = 12
+    private val turns = 12
 
     override fun runGames() {
         var numPegs:Int
