@@ -8,17 +8,34 @@ import org.junit.Test
 import java.util.*
 
 class PegFactoryTest {
-    
-//    @Before
-//    fun build() {
-//        PegFactory.startFactory(4)
-//        listLength = PegFactory.listLength
-//    }
-//
-//    @Test
-//    fun testListLength() {
-//        assertEquals(4, PegFactory.listLength)
-//    }
+
+    @Test
+    fun testMakePegsNumber() {
+        val pegList: PegList = PegFactory.makePegs(mutableListOf(Rcolour, Ycolour, Gcolour, Pcolour))
+        assertEquals(4, pegList.getPegMap().size)
+    }
+
+    @Test
+    fun testMakePegsColour() {
+        val pegList: PegList = PegFactory.makePegs(mutableListOf(Rcolour, Ycolour, Gcolour, Pcolour))
+        assertEquals("RYGP", pegList.toString())
+    }
+
+    @Test
+    fun testMakePegsResult() {
+        val pegList: PegList = PegFactory.makePegs(mutableListOf(ResultColourBlack, ResultColourBlack,
+                ResultColourWhite, ResultNoColour))
+        assertEquals(4, pegList.getPegMap().size)
+    }
+
+    // Test won't always pass - could conceivably shuffle into the same order.
+    @Test
+    fun testMakePegsResultShuffle() {
+        val pegList: PegList = PegFactory.makePegs(mutableListOf(ResultColourBlack, ResultColourBlack,
+                ResultColourWhite, ResultColourBlack))
+        assertNotEquals("Black Black White Black ", pegList.toString())
+    }
+
 
     @Test
     fun testFindingColours() {
