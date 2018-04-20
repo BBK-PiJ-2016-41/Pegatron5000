@@ -50,14 +50,14 @@ class ColoursTest {
 
     @Test
     fun testBlackcolour() {
-        val expected = "Black"
+        val expected = "Black "
         val actual = ResultColourBlack.toString()
         assertEquals(expected, actual)
     }
 
     @Test
     fun testWhitecolour() {
-        val expected = "White"
+        val expected = "White "
         val actual = ResultColourWhite.toString()
         assertEquals(expected, actual)
     }

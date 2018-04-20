@@ -7,6 +7,6 @@ class GuessValidatorImpl(private val numPegs: Int): GuessValidator {
      */
     override fun checkGuess(pegList: PegList): Boolean {
         return pegList.getPegMap().map{peg -> peg.value}.fold(0){sum, pegs ->
-            sum + if(PegFactory.findAvailableColours().contains(pegs.colour)) 1 else 0} == numPegs
+            sum + if(PegFactoryImpl.findAvailableColours().contains(pegs.colour)) 1 else 0} == numPegs
     }
 }

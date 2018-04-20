@@ -3,38 +3,21 @@ package MastermindGame
 import MastermindGame.Colours.Colour
 import java.util.*
 
-object PegFactory {
+interface PegFactory {
 
     /**
      * mMthod to generate a peg list from a list of Colour objects
      * @param input : list of Colours
      * @return PegList : PegListImpl object containing pegs of the specified colour and amount
      */
-    fun makePegs(input: MutableList<Colour>): PegList {
-        val pegs = mutableListOf<Peg>()
-        input.forEach { pegs.add(PegImpl(it)) } // Turn each colour into a peg and add to list
-
-        // Return a shuffled pegList if result, else return in the same order
-        return when (input[0].toString()) {
-            "White ", "Black ", "" -> PegListImpl(pegs.shuffled() as MutableList)
-            else -> PegListImpl(pegs)
-        }
-
-    }
+    fun makePegs(input: MutableList<Colour>): PegList
 
     /**
      * method to generate sequence of colours
      * @param num : amount of colours needed, size of the sequence required
      * @return randomColours : array list of the colours selected randomly
      */
-    fun generateSequence(num : Int) : ArrayList<Colour> {
-        val availableColours = findAvailableColours()
-        var randomColours = arrayListOf<Colour>()
-        for(x in 1..num) {
-            randomColours.add(availableColours[Random().nextInt(availableColours.size)])
-        }
-        return randomColours
-    }
+    fun generateSequence(num : Int) : ArrayList<Colour>
 
 
     /**
@@ -46,25 +29,7 @@ object PegFactory {
      *
      * @return availableColours : a list of colours found that the game can use
      */
-    fun findAvailableColours() : MutableList<Colour> {
-        val availableColours = mutableListOf<Colour>()
-        val colourLetters = arrayListOf<String>("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
-                "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
-
-        for(letter in colourLetters) {
-            try {
-                val classCalled = "MastermindGame.Colours." + letter + "colour"
-                val reflectClass = Class.forName(classCalled).kotlin.objectInstance as Colour
-                availableColours.add(reflectClass)
-            } catch(e: ClassNotFoundException) {
-                //if class is not found it means that there isn't a class of that name so skips over it
-            } catch(e: Exception) {
-                //no other exceptions expected, so alerts user if this is the case
-                print("An unexpected exception $e has been found")
-            }
-        }
-        return availableColours
-    }
+    fun findAvailableColours() : MutableList<Colour>
 
 
     /**
@@ -77,12 +42,5 @@ object PegFactory {
      * @param numPegs: the number of pegs being used for this game
      * @return Mutable list of Colours that correspond to the input
      */
-    fun interpretUserInput(userInput : String, numPegs: Int) : MutableList<Colour> {
-        val colours = findAvailableColours().map{Pair(it.letter, it)}.toMap()
-        val result = userInput.split("").filter{(colours.containsKey(it))}
-                .map{colours[it] as Colour}.toMutableList()
-        if (result.size != numPegs || userInput.length != numPegs) throw InputMismatchException("Please enter a string of length $numPegs with the correct colours")
-        return result
-    }
-
+    fun interpretUserInput(userInput : String, numPegs: Int) : MutableList<Colour>
 }

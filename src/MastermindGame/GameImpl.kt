@@ -97,7 +97,7 @@ How many pegs do you want? """)
      */
     private fun generateCode(numPegs: Int) : PegList {
         println("Generating secret code....")
-        return PegFactory.makePegs(PegFactory.generateSequence(numPegs))
+        return PegFactoryImpl.makePegs(PegFactoryImpl.generateSequence(numPegs))
     }
 
     /**
@@ -114,11 +114,11 @@ How many pegs do you want? """)
         println("What is your next guess?\nType in the characters for your guess and press enter.")
         print("Enter guess: ")
         var valid = false
-        var guessPegList = PegFactory.makePegs(PegFactory.generateSequence(1))
+        var guessPegList = PegFactoryImpl.makePegs(PegFactoryImpl.generateSequence(1))
         while(!valid) {
             try {
                 val userGuess = readLine()!!.toUpperCase()
-                guessPegList = PegFactory.makePegs(PegFactory.interpretUserInput(userGuess, numPegs))
+                guessPegList = PegFactoryImpl.makePegs(PegFactoryImpl.interpretUserInput(userGuess, numPegs))
                 displayTheCode(showCode, secretCodePegs)
                 if (validator.checkGuess(guessPegList)) valid = true
             } catch(e: InputMismatchException) {
@@ -142,7 +142,7 @@ How many pegs do you want? """)
      * @return a string of colours
      */
     private fun printAvailableColours(): String {
-        val colours = PegFactory.findAvailableColours()
+        val colours = PegFactoryImpl.findAvailableColours()
         var listOfColours = ""
         for (colour in colours) {
             listOfColours += colour.toString()
@@ -156,7 +156,7 @@ How many pegs do you want? """)
      * @param guessPegList: the users guess as a list of pegs that needs checking
      */
     private fun updateAndPrintHistory(guessCheck : GuessCheckerImpl, guessPegList: PegList) {
-        val result = PegFactory.makePegs(guessCheck.generateResult() as MutableList<Colour>)
+        val result = PegFactoryImpl.makePegs(guessCheck.generateResult() as MutableList<Colour>)
         GameHistoryImpl.addGuess(guessPegList, result)
         GameHistoryImpl.printProgress()
     }
