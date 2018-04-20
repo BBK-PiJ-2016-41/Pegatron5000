@@ -13,5 +13,8 @@ interface GuessChecker {
      */
     fun generateResult(): List<Colour>
 
+    /**
+     * Returns true if the result from the current guess is correct.
+     */
     fun isCorrect(): Boolean
 }

@@ -19,7 +19,9 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
      * Stores the current guess that is being evaluated by the checker
      */
     private lateinit var pegGuess: PegList
-
+    /**
+     * Stores the result from the guess that is currently held by the checker
+     */
     private lateinit var pegResult: List<Colour>
 
     /**
@@ -29,18 +31,12 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
         codeColourMap = mapColours(secretPegCode.getPegMap().map{it.value}) as MutableMap<String, Int>
     }
 
-    /**
-     * Accepts a new guess into the guess checker for evaluation
-     */
     override fun setGuess(newGuess: PegList) {
         pegGuess = newGuess
         guessColourMap = mapColours(pegGuess.getPegMap().map{it.value}) as MutableMap<String, Int>
         codeColourMap = mapColours(secretPegCode.getPegMap().map{it.value}) as MutableMap<String, Int>
     }
 
-    /**
-     * Generates the result from the current guess held by the guess checker.
-     */
     override fun generateResult(): List<Colour> {
         pegResult = pegGuess.getPegMap().map{checkPegForBlacks(it.value, it.key)}.map{if(!(it is ResultColourBlack)) checkAllColours(it) else ResultColourBlack}
         return pegResult
@@ -90,8 +86,5 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
         if (guessColourMap[colour] == 0) guessColourMap.remove(colour)
     }
 
-    /**
-     *
-     */
     override fun isCorrect() = pegResult.fold(true){bool, colour -> colour.name == "Black" && bool}
 }
