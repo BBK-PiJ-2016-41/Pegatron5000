@@ -2,7 +2,9 @@ package MastermindGame
 
 object MastermindDriver {
 
-    // Example - change as you need to...
+    /**
+     * the main entry point into the Mastermind game
+     */
     @JvmStatic
     fun main(args: Array<String>) {
         var g = Factory.getInstance(GameImpl::class, true)

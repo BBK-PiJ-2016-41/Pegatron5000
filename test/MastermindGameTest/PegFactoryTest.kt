@@ -5,20 +5,20 @@ import MastermindGame.Colours.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import java.util.*
 
 class PegFactoryTest {
-    var listLength = 0
-
-    @Before
-    fun build() {
-        PegFactory.startFactory(4)
-        listLength = PegFactory.listLength
-    }
-
-    @Test
-    fun testListLength() {
-        assertEquals(4, PegFactory.listLength)
-    }
+    
+//    @Before
+//    fun build() {
+//        PegFactory.startFactory(4)
+//        listLength = PegFactory.listLength
+//    }
+//
+//    @Test
+//    fun testListLength() {
+//        assertEquals(4, PegFactory.listLength)
+//    }
 
     @Test
     fun testFindingColours() {
@@ -58,6 +58,16 @@ class PegFactoryTest {
         val result = PegFactory.interpretUserInput("BGOP", 4)
         val expected = mutableListOf<Peg>(PegImpl(Bcolour), PegImpl(Gcolour), PegImpl(Ocolour), PegImpl(Pcolour))
         assertEquals(expected.toString(), result.toString())
+    }
+
+    @Test (expected = InputMismatchException::class)
+    fun testInterpretUserInputIncorrectLetter() {
+        val result = PegFactory.interpretUserInput("jfhf", 4)
+    }
+
+    @Test (expected = InputMismatchException::class)
+    fun testInterpretUserInputIncorrectLength() {
+        val result = PegFactory.interpretUserInput("BGOPBGOP", 4)
     }
 
 }

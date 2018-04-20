@@ -10,11 +10,11 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
     /**
      * A map to hold the number of each colour in the secret peg code
      */
-    private var codeColourMap: Map<String, Int>
+    private var codeColourMap: MutableMap<String, Int>
     /**
      * A map to hold the number of each colour in the guess peg list
      */
-    private lateinit var guessColourMap: Map<String, Int>
+    private lateinit var guessColourMap: MutableMap<String, Int>
     /**
      * Stores the current guess that is being evaluated by the checker
      */
@@ -26,7 +26,7 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
      * Upon initialisation, maps the colours in the peg code to indicate how many times each occurs
      */
     init {
-        codeColourMap = mapColours(secretPegCode.getPegMap().map{it.value})
+        codeColourMap = mapColours(secretPegCode.getPegMap().map{it.value}) as MutableMap<String, Int>
     }
 
     /**
@@ -34,31 +34,40 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
      */
     override fun setGuess(newGuess: PegList) {
         pegGuess = newGuess
-        guessColourMap = mapColours(pegGuess.getPegMap().map{it.value})
+        guessColourMap = mapColours(pegGuess.getPegMap().map{it.value}) as MutableMap<String, Int>
+        codeColourMap = mapColours(secretPegCode.getPegMap().map{it.value}) as MutableMap<String, Int>
     }
 
     /**
      * Generates the result from the current guess held by the guess checker.
      */
     override fun generateResult(): List<Colour> {
-        pegResult = pegGuess.getPegMap().map{checkPeg(it.value, it.key)}
+        pegResult = pegGuess.getPegMap().map{checkPegForBlacks(it.value, it.key)}.map{if(!(it is ResultColourBlack)) checkAllColours(it) else ResultColourBlack}
         return pegResult
     }
 
     /**
      * A helper function for generateResult() that checks for an exact match between the guess peg colour and code peg colour
      */
-    private fun checkPeg(peg: Peg, pegIndex: Int): Colour = when (peg.colour.name) {
-        (secretPegCode.getPegMap()[pegIndex])!!.colour.name -> ResultColourBlack
-        else -> checkAllColours(peg)
+    private fun checkPegForBlacks(peg: Peg, pegIndex: Int): Colour = when (peg.colour.name) {
+        (secretPegCode.getPegMap()[pegIndex])!!.colour.name -> {
+            removePegColoursFromMaps(peg.colour.name)
+            ResultColourBlack
+        }
+        else -> peg.colour
     }
 
     /**
      * A helper function for checkPeg() that checks for a colour match elsewhere in the guess code in the event of a failed match
      */
-    private fun checkAllColours(pegToCheck: Peg): Colour {
-        return if(codeColourMap.contains(pegToCheck.colour.name) && codeColourMap[pegToCheck.colour.name]!! >= guessColourMap[pegToCheck.colour.name]!!) ResultColourWhite
-        else ResultNoColour
+    private fun checkAllColours(colourToCheck: Colour): Colour {
+        if (codeColourMap.containsKey(colourToCheck.name)) {
+            if (codeColourMap[colourToCheck.name]!! <= guessColourMap[colourToCheck.name]!!) {
+                removePegColoursFromMaps(colourToCheck.name)
+                return ResultColourWhite
+            }
+        }
+        return ResultNoColour
     }
 
     /**
@@ -72,6 +81,13 @@ class GuessCheckerImpl (private val secretPegCode: PegList): GuessChecker {
             else map[it.colour.name] = 1
         }
         return map
+    }
+
+    private fun removePegColoursFromMaps(colour: String) {
+        codeColourMap[colour] = codeColourMap[colour]!! - 1
+        if (codeColourMap[colour] == 0) codeColourMap.remove(colour)
+        guessColourMap[colour] = guessColourMap[colour]!! - 1
+        if (guessColourMap[colour] == 0) guessColourMap.remove(colour)
     }
 
     /**

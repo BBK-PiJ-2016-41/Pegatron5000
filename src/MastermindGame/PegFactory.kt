@@ -5,30 +5,29 @@ import java.util.*
 
 object PegFactory {
 
-
     fun makePegs(input: MutableList<Colour>): PegList {
         val pegs = mutableListOf<Peg>()
         input.forEach { pegs.add(PegImpl(it)) } // Turn each colour into a peg and add to list
 
         // Return a shuffled pegList if result, else return in the same order
-        return if (input[0].letter.length != 1) { PegListImpl(pegs.shuffled() as MutableList) } else { PegListImpl(pegs) }
+        return when (input[0].toString()) {
+            "White ", "Black ", "" -> PegListImpl(pegs.shuffled() as MutableList)
+            else -> PegListImpl(pegs)
+        }
+
     }
 
     /**
      * method to generate sequence of colours
      * @param num : amount of colours needed, size of the sequence required
-     * @param availableColours : array list of all the colours available to be used for the sequence
      * @return randomColours : array list of the colours selected randomly
      */
     fun generateSequence(num : Int) : ArrayList<Colour> {
         val availableColours = findAvailableColours()
-        val randomColours = arrayListOf<Colour>()
-
+        var randomColours = arrayListOf<Colour>()
         for(x in 1..num) {
-            val r = Random().nextInt(availableColours.size)
-            randomColours.add(availableColours[r])
+            randomColours.add(availableColours[Random().nextInt(availableColours.size)])
         }
-
         return randomColours
     }
 
@@ -43,7 +42,7 @@ object PegFactory {
      * @return availableColours : a list of colours found that the game can use
      */
     fun findAvailableColours() : MutableList<Colour> {
-        var availableColours = mutableListOf<Colour>()
+        val availableColours = mutableListOf<Colour>()
         val colourLetters = arrayListOf<String>("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
                 "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
 
@@ -62,11 +61,21 @@ object PegFactory {
         return availableColours
     }
 
-    //return mutable list of pegs
+
+    /**
+     * Takes a string from the userinput of colours they want to guess and turns it into a list
+     * of colours so that it can become a peglist for comparison
+     * Validates whether the input contains the colours and number of pegs being used in the game,
+     * throwing an exception if not
+     *
+     * @param userInput: the string of the colour initials the user is guessing
+     * @param numPegs: the number of pegs being used for this game
+     * @return Mutable list of Colours that correspond to the input
+     */
     fun interpretUserInput(userInput : String, numPegs: Int) : MutableList<Colour> {
-        val colours = findAvailableColours().map{colour -> Pair(colour.letter, colour)}.toMap()
-        val result = userInput.split("").filter{ letter -> (colours.containsKey(letter))}
-                .map{letter -> colours[letter] as Colour}.toMutableList()
+        val colours = findAvailableColours().map{Pair(it.letter, it)}.toMap()
+        val result = userInput.split("").filter{(colours.containsKey(it))}
+                .map{colours[it] as Colour}.toMutableList()
         if (result.size != numPegs || userInput.length != numPegs) throw InputMismatchException("Please enter a string of length $numPegs with the correct colours")
         return result
     }
