@@ -8,7 +8,6 @@ The Mastermind game for SDP CW3 - Go Team Win
 <p>To-do</p>
 <ul>
 	<li>I think GuessValidator and GuessValidatorImpl can be deleted.  I created a GameImpl which didn't use it and i think PegFactory.interpretUserInput does what the GuessValidator does</li>
-	<li>Should PegFactory have an interface? We have a mix of objects don't have interfaces and some that do</li>
 	<li>Add summary of how to add colours, change amount of turns and select number of pegs to play with to ReadMe</li>
 	<li>Add break down of areas worked on by each of us to the ReadMe</li>
 	<li>Colour.kt requires docstring</li>
