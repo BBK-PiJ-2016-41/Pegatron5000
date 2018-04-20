@@ -36,7 +36,7 @@ class GameImpl(val showCode: Boolean): GameAbstractImpl(showCode) {
             val guessCheck = GuessCheckerImpl(secretCodePegs)
 
             while (GameHistoryImpl.getProgress() <= turns && !gameFinished) {
-                val guessPegList = getUserGuess(numPegs, secretCodePegs, GuessValidatorImpl(numPegs))
+                val guessPegList = getUserGuess(numPegs, secretCodePegs)
                 guessCheck.setGuess(guessPegList)
                 updateAndPrintHistory(guessCheck, guessPegList)
                 checkGuess(guessCheck)
@@ -106,10 +106,9 @@ How many pegs do you want? """)
      * if the guess is invalid the user must try again
      * @param numPegs: the number of pegs required for the user's guess
      * @param secretCodePegs: the pegs that make up the secret code so they can be displayed if required
-     * @param validator: a GuessValidatorImpl object so that the guess can be validated
      * @return the user's guess
      */
-    private fun getUserGuess(numPegs: Int, secretCodePegs: PegList, validator: GuessValidatorImpl): PegList {
+    private fun getUserGuess(numPegs: Int, secretCodePegs: PegList): PegList {
         println("You have ${turns - GameHistoryImpl.getProgress()} guesses left\n")
         println("What is your next guess?\nType in the characters for your guess and press enter.")
         print("Enter guess: ")
@@ -120,7 +119,7 @@ How many pegs do you want? """)
                 val userGuess = readLine()!!.toUpperCase()
                 guessPegList = PegFactoryImpl.makePegs(PegFactoryImpl.interpretUserInput(userGuess, numPegs))
                 displayTheCode(showCode, secretCodePegs)
-                if (validator.checkGuess(guessPegList)) valid = true
+                valid = true
             } catch(e: InputMismatchException) {
                 println(e.message)
             }
