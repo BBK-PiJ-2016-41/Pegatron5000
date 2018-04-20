@@ -19,5 +19,8 @@ interface GameHistory {
      */
     fun printProgress()
 
+    /** Clears history when a new game starts
+     *
+     */
     fun clearHistory()
 }

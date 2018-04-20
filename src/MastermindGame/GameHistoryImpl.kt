@@ -8,22 +8,12 @@ object GameHistoryImpl: GameHistory {
      */
     private var guessResultMap = mutableMapOf<PegList, PegList>()
 
-    /**
-     * Takes a guess in the form of a PegList, and result in the form of a List<Colour>
-     *     to keep a record of the game progress.
-     */
     override fun addGuess(guess: PegList, result: PegList) {
         guessResultMap.put(guess, result)
     }
 
-    /**
-     * Returns the total number of guess/result combinations so far
-     */
     override fun getProgress() = guessResultMap.size
 
-    /**
-     * Prints out the guesses and results made so far
-     */
     override fun printProgress() {
         guessResultMap.forEach { t, u -> println("Guess: $t, Result: $u") }
     }
