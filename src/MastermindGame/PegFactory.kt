@@ -5,6 +5,11 @@ import java.util.*
 
 object PegFactory {
 
+    /**
+     * mMthod to generate a peg list from a list of Colour objects
+     * @param input : list of Colours
+     * @return PegList : PegListImpl object containing pegs of the specified colour and amount
+     */
     fun makePegs(input: MutableList<Colour>): PegList {
         val pegs = mutableListOf<Peg>()
         input.forEach { pegs.add(PegImpl(it)) } // Turn each colour into a peg and add to list
