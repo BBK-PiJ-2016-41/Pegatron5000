@@ -6,8 +6,8 @@ import java.util.*
 object PegFactory {
 
     /**
-     * method to generate a peg list from a list of colours
-     * @param input : list of colours
+     * mMthod to generate a peg list from a list of Colour objects
+     * @param input : list of Colours
      * @return PegList : PegListImpl object containing pegs of the specified colour and amount
      */
     fun makePegs(input: MutableList<Colour>): PegList {
